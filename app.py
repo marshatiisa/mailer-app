@@ -3,8 +3,16 @@ from mars_emails import get_mars_photo, send_mars_email
 
 app = Flask(__name__)
 
+@app.route('/event', methods=['POST'])
+def email_event():
+    event = request.json[0]['event']
+
+    if event == 'delivered':
+        print('Your email has been delivered')
+    return '', 200
+
 @app.route('/email', methods=['POST'])
-def email_respponse():
+def email_response():
     to_email = request.form['to']
     from_email = request.form['from']
     text = request.form['text']
@@ -17,4 +25,5 @@ def email_respponse():
     else:
         img_url = get_mars_photo(1000)
     
-    send_mars_email(from_email, to_email, sol)
+    send_mars_email(from_email, to_email, sol, img_url)
+    return '', 200

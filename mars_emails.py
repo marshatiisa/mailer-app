@@ -11,7 +11,7 @@ def send_mars_email(to_email, from_email, img_url):
     message = Mail(from_email = from_email,
                    to_email = to_email,
                    subject= 'Here is your mars rover photo',
-                   html_content = '<br></br>'
+                   html_content = '<br></br><img src={img_url}></img>'
                    )
 
 
